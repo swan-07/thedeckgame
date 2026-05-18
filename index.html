@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Deck Game</title>
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><text x="16" y="27" text-anchor="middle" font-size="30" fill="black">%E2%99%A0</text></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: radial-gradient(ellipse at center, #1a0a0f 0%, #08050a 45%, #000 100%);
+    color: #fff;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 32 32"><text x="16" y="26" text-anchor="middle" font-size="28" fill="white" stroke="black" stroke-width="0.6">%E2%99%A0</text></svg>') 16 16, auto;
+  }
+  .wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  h1 {
+    font-family: "Cinzel", serif;
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  p {
+    font-family: "JetBrains Mono", monospace;
+    font-size: clamp(0.65rem, 1vw, 0.8rem);
+    margin: 0.8rem 0 0;
+    opacity: 0.5;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    padding-left: 0.35em;
+  }
+  .card {
+    position: fixed;
+    width: 90px;
+    height: 130px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 18px 4px rgba(255, 255, 255, 0.55), 0 0 48px 12px rgba(255, 255, 255, 0.22);
+    transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+    pointer-events: none;
+    animation: cardFade 1.2s ease-out forwards;
+    user-select: none;
+    background: #fff;
+  }
+  .card img {
+    width: 104%;
+    height: 104%;
+    margin: -2%;
+    display: block;
+  }
+  @keyframes cardFade {
+    0%   { opacity: 0; transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(0.6); }
+    25%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, calc(-50% - 40px)) rotate(var(--r, 0deg)) scale(1); }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>The Deck Game</h1>
+    <p>Coming Soon</p>
+  </div>
+  <script>
+    const ranks = ["ace","2","3","4","5","6","7","8","9","10","jack","queen","king"];
+    const suits = ["spades","clubs","hearts","diamonds"];
+    const base = "https://raw.githubusercontent.com/hayeah/playing-cards-assets/master/svg-cards/";
+    ranks.forEach(r => suits.forEach(s => { const i = new Image(); i.src = base + r + "_of_" + s + ".svg"; }));
+    document.addEventListener("click", (e) => {
+      const rank = ranks[Math.floor(Math.random() * 13)];
+      const suit = suits[Math.floor(Math.random() * 4)];
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.left = e.clientX + "px";
+      card.style.top = e.clientY + "px";
+      card.style.setProperty("--r", (Math.random() * 20 - 10).toFixed(2) + "deg");
+      const img = document.createElement("img");
+      img.src = base + rank + "_of_" + suit + ".svg";
+      card.appendChild(img);
+      document.body.appendChild(card);
+      setTimeout(() => card.remove(), 1300);
+    });
+  </script>
+</body>
+</html>
