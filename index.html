@@ -74,10 +74,10 @@
     <p>Coming Soon</p>
   </div>
   <script>
-    const ranks = ["ace","2","3","4","5","6","7","8","9","10","jack","queen","king"];
-    const suits = ["spades","clubs","hearts","diamonds"];
-    const base = "https://raw.githubusercontent.com/hayeah/playing-cards-assets/master/svg-cards/";
-    ranks.forEach(r => suits.forEach(s => { const i = new Image(); i.src = base + r + "_of_" + s + ".svg"; }));
+    const ranks = ["1","2","3","4","5","6","7","8","9","10","11","12","13"];
+    const suits = ["S","C","H","D"];
+    const base = "cards/";
+    ranks.forEach(r => suits.forEach(s => { const i = new Image(); i.src = base + s + "-" + r + ".png"; }));
     document.addEventListener("click", (e) => {
       const rank = ranks[Math.floor(Math.random() * 13)];
       const suit = suits[Math.floor(Math.random() * 4)];
@@ -87,7 +87,7 @@
       card.style.top = e.clientY + "px";
       card.style.setProperty("--r", (Math.random() * 20 - 10).toFixed(2) + "deg");
       const img = document.createElement("img");
-      img.src = base + rank + "_of_" + suit + ".svg";
+      img.src = base + suit + "-" + rank + ".png";
       card.appendChild(img);
       document.body.appendChild(card);
       setTimeout(() => card.remove(), 1300);
