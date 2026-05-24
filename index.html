@@ -87,9 +87,11 @@
     }
     .flip { width: 100%; max-width: 140px; margin: 0 auto; }
   }
-  @media (max-width: 380px) {
-    .nav { position: static; display: block; margin-bottom: 0.75rem; }
-    header { padding: 1.25rem 1rem; }
+  @media (max-width: 700px) {
+    header { display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem; }
+    .nav { position: static; order: 3; margin-top: 1rem; }
+    h1 { order: 1; }
+    .next { order: 2; }
   }
   .suit {
     text-align: center;
