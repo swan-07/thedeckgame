@@ -1,4 +1,4 @@
-User Facing Site: [https://thedeckgame.vercel.app/](URL)
+User Facing Site: https://thedeckgame.vercel.app/
 
 # The Deck Game
 
