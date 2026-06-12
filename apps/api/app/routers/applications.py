@@ -43,7 +43,7 @@ def submit_application(
     db: Session = Depends(get_db),
 ) -> ApplicationDetail:
     game = db.get(Game, payload.game_id)
-    if game is None or game.status != GameStatus.published:
+    if game is None or game.status != GameStatus.published or game.deleted_at is not None:
         raise HTTPException(status_code=404, detail="Game not open for applications")
 
     now = datetime.now(timezone.utc)

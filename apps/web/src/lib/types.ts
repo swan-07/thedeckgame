@@ -65,6 +65,7 @@ export interface GameSummary {
   status: GameStatus;
   opens_at: string | null;
   closes_at: string | null;
+  deleted_at: string | null;
   application_count: number;
 }
 
