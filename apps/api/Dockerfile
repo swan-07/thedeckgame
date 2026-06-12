@@ -5,10 +5,10 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-COPY pyproject.toml ./
-RUN pip install --no-cache-dir .
-
+# Copy the whole app first: building the package needs the `app/` source tree
+# present, so pyproject.toml alone is not enough.
 COPY . .
+RUN pip install --no-cache-dir .
 
 EXPOSE 8000
 
