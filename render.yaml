@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: thedeckgame-api
+    runtime: docker
+    rootDir: apps/api
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      # Optional: only for projects still on the legacy HS256 shared secret.
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_DIRECT_URL
+        sync: false
+      - key: ADMIN_EMAILS
+        sync: false
+      - key: RESUMES_BUCKET
+        value: resumes
+      - key: CORS_ORIGINS
+        sync: false

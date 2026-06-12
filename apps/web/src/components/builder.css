@@ -1,0 +1,74 @@
+.builder {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.builder-row {
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+.builder-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.builder-num {
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+.builder-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+.builder-actions button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  border-radius: 3px;
+  width: 1.8rem;
+  height: 1.8rem;
+  font-size: 0.8rem;
+}
+.builder-actions button:hover:not(:disabled) {
+  border-color: var(--gold);
+}
+.builder-actions button:disabled {
+  opacity: 0.3;
+}
+.builder-controls {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.builder-options {
+  margin-top: 1rem;
+}
+.opt-label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 0.5rem;
+}
+.opt-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.opt-row button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  border-radius: 3px;
+  width: 2.2rem;
+  flex: none;
+}
+.btn-sm {
+  font-size: 0.65rem;
+  padding: 0.45rem 0.9rem;
+}
