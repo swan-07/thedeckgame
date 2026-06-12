@@ -1,4 +1,5 @@
-User Facing Site: https://thedeckgame.vercel.app/
+User Facing Site: [https://thedeckgame.vercel.app/](URL)
+
 # The Deck Game
 
 A year-long, 52-challenge competition based at Yale. Each event is a card in a
