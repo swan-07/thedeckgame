@@ -57,6 +57,7 @@ class GameSummary(BaseModel):
     status: GameStatus
     opens_at: datetime | None
     closes_at: datetime | None
+    deleted_at: datetime | None = None
     application_count: int = 0
 
 

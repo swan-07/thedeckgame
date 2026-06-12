@@ -61,14 +61,16 @@ def create_game(
     return game
 
 
-@router.get("/games", response_model=list[GameSummary])
-def list_games(db: Session = Depends(get_db)) -> list[GameSummary]:
+def _game_summaries(db: Session, *, deleted: bool) -> list[GameSummary]:
     count = func.count(Application.id)
+    where = Game.deleted_at.is_not(None) if deleted else Game.deleted_at.is_(None)
+    order = Game.deleted_at.desc() if deleted else Game.created_at.desc()
     stmt = (
         select(Game, count)
         .outerjoin(Application, Application.game_id == Game.id)
+        .where(where)
         .group_by(Game.id)
-        .order_by(Game.created_at.desc())
+        .order_by(order)
     )
     out: list[GameSummary] = []
     for game, n in db.execute(stmt).all():
@@ -76,6 +78,19 @@ def list_games(db: Session = Depends(get_db)) -> list[GameSummary]:
         summary.application_count = n
         out.append(summary)
     return out
+
+
+@router.get("/games", response_model=list[GameSummary])
+def list_games(db: Session = Depends(get_db)) -> list[GameSummary]:
+    """Active (non-deleted) games."""
+    return _game_summaries(db, deleted=False)
+
+
+# Must be declared before "/games/{game_id}" so "deleted" isn't parsed as an id.
+@router.get("/games/deleted", response_model=list[GameSummary])
+def list_deleted_games(db: Session = Depends(get_db)) -> list[GameSummary]:
+    """Soft-deleted games — admin-only, never exposed to applicants."""
+    return _game_summaries(db, deleted=True)
 
 
 @router.get("/games/{game_id}", response_model=GameDetail)
@@ -149,6 +164,49 @@ def close_game(game_id: uuid.UUID, db: Session = Depends(get_db)) -> Game:
     if game is None:
         raise HTTPException(status_code=404, detail="Game not found")
     game.status = GameStatus.closed
+    db.commit()
+    db.refresh(game)
+    return game
+
+
+@router.post("/games/{game_id}/reopen", response_model=GameDetail)
+def reopen_game(game_id: uuid.UUID, db: Session = Depends(get_db)) -> Game:
+    """Reopen a closed game back to published."""
+    game = db.get(Game, game_id)
+    if game is None:
+        raise HTTPException(status_code=404, detail="Game not found")
+    game.status = GameStatus.published
+    # If it had a close date that's already passed, clear it so the reopen is
+    # actually effective (otherwise the date gate would still reject applicants).
+    now = datetime.now(timezone.utc)
+    if game.closes_at and game.closes_at < now:
+        game.closes_at = None
+    if game.opens_at is None:
+        game.opens_at = now
+    db.commit()
+    db.refresh(game)
+    return game
+
+
+@router.delete("/games/{game_id}", response_model=GameDetail)
+def delete_game(game_id: uuid.UUID, db: Session = Depends(get_db)) -> Game:
+    """Soft delete: archive the game. Hidden from applicants, recoverable."""
+    game = db.get(Game, game_id)
+    if game is None or game.deleted_at is not None:
+        raise HTTPException(status_code=404, detail="Game not found")
+    game.deleted_at = datetime.now(timezone.utc)
+    db.commit()
+    db.refresh(game)
+    return game
+
+
+@router.post("/games/{game_id}/restore", response_model=GameDetail)
+def restore_game(game_id: uuid.UUID, db: Session = Depends(get_db)) -> Game:
+    """Recover a soft-deleted game, returning it to its prior status."""
+    game = db.get(Game, game_id)
+    if game is None:
+        raise HTTPException(status_code=404, detail="Game not found")
+    game.deleted_at = None
     db.commit()
     db.refresh(game)
     return game

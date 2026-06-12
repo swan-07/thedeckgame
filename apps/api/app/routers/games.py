@@ -18,7 +18,11 @@ VISIBLE = (GameStatus.published, GameStatus.closed)
 @router.get("", response_model=list[GamePublic])
 def list_games(db: Session = Depends(get_db)) -> list[Game]:
     """All games visible to applicants (published or closed), for the deck grid."""
-    stmt = select(Game).where(Game.status.in_(VISIBLE)).order_by(Game.suit, Game.rank)
+    stmt = (
+        select(Game)
+        .where(Game.status.in_(VISIBLE), Game.deleted_at.is_(None))
+        .order_by(Game.suit, Game.rank)
+    )
     return list(db.scalars(stmt).all())
 
 
@@ -28,6 +32,6 @@ def get_game(
     db: Session = Depends(get_db),
 ) -> Game:
     game = db.get(Game, game_id)
-    if game is None or game.status not in VISIBLE:
+    if game is None or game.status not in VISIBLE or game.deleted_at is not None:
         raise HTTPException(status_code=404, detail="Game not found")
     return game
