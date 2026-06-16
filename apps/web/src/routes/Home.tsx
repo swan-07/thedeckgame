@@ -31,7 +31,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="center" style={{ padding: "0 1rem 1rem" }}>
+      <div className="center" style={{ padding: "0 1rem 0.4rem" }}>
         {isLoading ? null : nextEventLine(games ?? [])}
       </div>
       {isLoading ? <div className="spinner" /> : <DeckGrid games={games ?? []} />}
