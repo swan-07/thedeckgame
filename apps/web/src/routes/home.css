@@ -1,9 +1,41 @@
+/* ── Scroll-snap pages (deck + partners) ──────────────────────── */
+.snap-page {
+  height: 100%;
+  scroll-snap-align: start;
+}
+.deck-page {
+  overflow: hidden;
+}
+.partners-page {
+  background: #242424; /* same grey as the key */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.partners-inner {
+  max-width: 34rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+}
+.partners-inner h2 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
 .deck-stage {
   width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
 .deck-track {
+  height: 100%;
   display: flex;
   align-items: flex-start;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -12,16 +44,39 @@
 
 .deck-panel {
   flex: 0 0 100%;
+  height: 100%;
+  overflow-y: auto; /* tall side decks scroll within the page, not the snap */
   padding: 0.8rem 0 2.5rem;
 }
 
 /* ── Center panel ─────────────────────────────────────────────── */
 .center-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* center the whole chunk vertically */
+  min-height: 100%; /* fill the deck page so the chunk centers in view */
+  padding: 0.8rem clamp(1rem, 4vw, 3rem) 2rem;
+}
+.center-main {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: start;
   gap: clamp(1rem, 4vw, 3rem);
-  padding: 0.8rem clamp(1rem, 4vw, 3rem) 2.5rem;
+  width: 100%;
+}
+.suit-index {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 6vw, 5rem);
+  margin-top: 13vh; /* separation from the cards above */
+}
+.suit-index .suit {
+  padding: 0;
+}
+.suit-index .suit-desc {
+  margin: 0;
 }
 .center-games {
   text-align: center;
@@ -57,7 +112,7 @@
   gap: 0.5rem;
 }
 .open-date {
-  font-family: var(--mono);
+  font-family: var(--serif);
   font-size: clamp(1rem, 1.4vw, 1.25rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -114,11 +169,29 @@
 
 /* ── Expanded panel header ────────────────────────────────────── */
 .panel-bar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.25rem;
+  min-height: 2rem;
   padding: 0 1rem 1rem;
+}
+/* The back button + key, stacked on one side of the bar. */
+.panel-nav {
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.panel-nav.left {
+  left: 1rem;
+  align-items: flex-start;
+}
+.panel-nav.right {
+  right: 1rem;
+  align-items: flex-end;
 }
 .panel-back {
   background: transparent;
@@ -126,7 +199,7 @@
   color: var(--fg);
   border-radius: 999px;
   padding: 0.4rem 1rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
@@ -143,8 +216,82 @@
   font-size: 0.9rem;
 }
 
+/* ── Suit key dropdown ────────────────────────────────────────── */
+.suit-key {
+  position: relative;
+  display: inline-block;
+}
+.suit-key-trigger {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--fg);
+  border-radius: 999px;
+  padding: 0.5rem 1.3rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.suit-key:hover .suit-key-trigger {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.suit-key-menu {
+  position: absolute;
+  z-index: 30;
+  min-width: 18rem;
+  background: #242424;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.51rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+.suit-key:hover .suit-key-menu {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* Flush to the trigger (no empty gap) so hover transfers without dropping. */
+.drop-down .suit-key-menu {
+  top: 100%;
+}
+.drop-up .suit-key-menu {
+  bottom: 100%;
+}
+.align-left .suit-key-menu {
+  left: 0;
+}
+.align-right .suit-key-menu {
+  right: 0;
+}
+.align-center .suit-key-menu {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.suit-key-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+.suit-key-row .sk-glyph {
+  width: 2rem;
+  text-align: center;
+  font-size: 2rem;
+}
+.suit-key-row.red .sk-glyph {
+  color: var(--red);
+}
+
 @media (max-width: 700px) {
-  .center-panel {
+  .center-main {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     text-align: center;

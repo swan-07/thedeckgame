@@ -42,8 +42,25 @@ h3 {
   font-family: var(--serif);
 }
 
+/* ── App shell ───────────────────────────────────────────────── */
+.shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.shell-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+/* On the home page, snap between the deck and the partners page. */
+.shell-content.snap {
+  scroll-snap-type: y mandatory;
+}
+
 /* ── Layout / header ─────────────────────────────────────────── */
 .site-header {
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;

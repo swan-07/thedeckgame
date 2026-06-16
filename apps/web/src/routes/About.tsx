@@ -25,9 +25,9 @@ export default function About() {
         from 2 → 10 → J → Q → K → A.
       </p>
 
-      <h2>Sponsors</h2>
+      <h2>Partners</h2>
       <p className="muted">
-        If you're interested in sponsoring a card, email{" "}
+        If you're interested in partnering on a card, email{" "}
         <a href="mailto:hosts@thedeckgame.com">hosts@thedeckgame.com</a>.
       </p>
 

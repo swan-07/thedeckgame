@@ -33,10 +33,6 @@
   object-fit: cover;
   border-radius: 5px;
 }
-/* One layer per remaining card — together they give the deck its thickness. */
-.deck-layer {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
-}
 .deal-card {
   will-change: transform, opacity;
 }
@@ -64,50 +60,16 @@
   display: block;
 }
 
-@keyframes deck-in {
-  from {
-    transform: translateX(-32vw);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes deck-in-left {
-  from {
-    transform: translateX(32vw);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes deck-peel {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
 @keyframes deal-in-flip {
   0% {
     transform: translate(var(--sx, 0px), var(--sy, 0px)) rotateY(180deg);
-    opacity: 0;
-  }
-  12% {
-    opacity: 1;
   }
   /* Pin edge-on (90deg) to exactly 50% so the face swap lands on the flip. */
   50% {
     transform: translate(calc(var(--sx, 0px) / 2), calc(var(--sy, 0px) / 2)) rotateY(90deg);
-    opacity: 1;
   }
   100% {
     transform: translate(0, 0) rotateY(0deg);
-    opacity: 1;
   }
 }
 /* Card face: hidden for the first half of the flip, shown for the second. */
@@ -146,7 +108,7 @@
   padding: 0.6rem 0 1.5rem;
 }
 .suit .glyph {
-  font-size: clamp(5rem, 11vw, 8.5rem);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
   line-height: 1;
   margin-bottom: 1rem;
 }
