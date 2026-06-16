@@ -1,0 +1,156 @@
+import { useLayoutEffect, useRef } from "react";
+
+import { RANK_ORDER, SUITS, type Suit } from "../lib/types";
+import type { Cell } from "../lib/games";
+import { CardTile } from "./CardTile";
+import "./deck.css";
+
+const rankIndex = (r: number) => RANK_ORDER.indexOf(r);
+
+// Animation timing.
+const DEAL_MS = 1400; // flight time of the cards
+const DECK_IN_MS = 650; // deck sliding into the corner before dealing starts
+const PEEL_MS = 420; // deck layers fading as the cards fly out
+
+// Order the four suit columns are dealt in, by origin corner.
+const SUIT_ORDER: Record<"left" | "right", Suit[]> = {
+  right: ["H", "D", "C", "S"], // deck top-right → deal right-to-left
+  left: ["S", "C", "D", "H"], // deck top-left → deal left-to-right
+};
+
+/**
+ * Renders cells in the four suit columns and, whenever `dealToken` changes,
+ * plays a dealing animation. The deck slides into a top corner with a
+ * thickness equal to the number of cards; each card flies out to its slot and
+ * the deck thins by one layer; the final card flips from back to face as it
+ * travels to its place. `origin` picks the corner and within-row direction.
+ */
+export function SuitGrid({
+  cells,
+  dealToken,
+  origin = "right",
+}: {
+  cells: Cell[];
+  dealToken: number;
+  origin?: "left" | "right";
+}) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const deckRef = useRef<HTMLDivElement>(null);
+
+  const bySuit = new Map<Suit, Cell[]>();
+  for (const s of SUITS) bySuit.set(s.code, []);
+  for (const c of cells) bySuit.get(c.suit)?.push(c);
+  for (const list of bySuit.values()) list.sort((a, b) => rankIndex(a.rank) - rankIndex(b.rank));
+
+  // Deal order: for each row top→bottom, cards across in the origin direction.
+  const dealOrder = new Map<string, number>();
+  const maxLen = Math.max(0, ...[...bySuit.values()].map((l) => l.length));
+  let order = 0;
+  for (let r = 0; r < maxLen; r++) {
+    for (const s of SUIT_ORDER[origin]) {
+      const list = bySuit.get(s)!;
+      if (r < list.length) dealOrder.set(`${list[r].suit}-${list[r].rank}`, order++);
+    }
+  }
+  const total = order;
+
+  useLayoutEffect(() => {
+    if (!dealToken) return; // no deal on first mount, only when opened
+    const wrap = wrapRef.current;
+    const deck = deckRef.current;
+    if (!wrap) return;
+    const cards = Array.from(wrap.querySelectorAll<HTMLElement>("[data-deal]"));
+    const faces = Array.from(wrap.querySelectorAll<HTMLElement>(".dc-face, .dc-back"));
+    const layers = deck ? Array.from(deck.querySelectorAll<HTMLElement>("[data-peel]")) : [];
+
+    // Reset so re-opening re-deals and so we can measure natural positions.
+    cards.forEach((el) => (el.style.animation = "none"));
+    faces.forEach((el) => (el.style.animation = "none"));
+    layers.forEach((el) => (el.style.animation = "none"));
+    if (deck) deck.style.animation = "none";
+    void wrap.offsetWidth; // reflow
+
+    // Measure each card's offset back to the deck (its flight start point).
+    const deckRect = deck?.getBoundingClientRect();
+    cards.forEach((el) => {
+      if (!deckRect) return;
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty("--sx", `${deckRect.left - rect.left}px`);
+      el.style.setProperty("--sy", `${deckRect.top - rect.top}px`);
+    });
+    void wrap.offsetWidth; // reflow before applying animations
+
+    // All cards fly to their slots together, once the deck is in place. Each
+    // card shows its back first, then its faces swap at the flip's midpoint.
+    cards.forEach((el) => {
+      el.style.animation = `deal-in-flip ${DEAL_MS}ms linear both`;
+      el.style.animationDelay = `${DECK_IN_MS}ms`;
+      const face = el.querySelector<HTMLElement>(".dc-face");
+      const back = el.querySelector<HTMLElement>(".dc-back");
+      if (face) {
+        face.style.animation = `flip-show ${DEAL_MS}ms linear both`;
+        face.style.animationDelay = `${DECK_IN_MS}ms`;
+      }
+      if (back) {
+        back.style.animation = `flip-hide ${DEAL_MS}ms linear both`;
+        back.style.animationDelay = `${DECK_IN_MS}ms`;
+      }
+    });
+
+    // The whole deck empties at once as the cards fly out.
+    layers.forEach((el) => {
+      el.style.animation = `deck-peel ${PEEL_MS}ms linear both`;
+      el.style.animationDelay = `${DECK_IN_MS}ms`;
+    });
+
+    if (deck && total > 0) {
+      const slideIn = origin === "left" ? "deck-in-left" : "deck-in";
+      deck.style.animation = `${slideIn} ${DECK_IN_MS}ms linear both`;
+    }
+  }, [dealToken, total, origin]);
+
+  return (
+    <div className="deal-wrap" ref={wrapRef}>
+      <div
+        className={"deal-deck" + (origin === "left" ? " deal-deck-left" : "")}
+        ref={deckRef}
+        aria-hidden
+      >
+        {Array.from({ length: total }).map((_, k) => (
+          <img
+            key={k}
+            className="deck-layer"
+            data-peel={k}
+            src="/cards/Back-B.png"
+            alt=""
+            style={{ transform: `translate(${k * 0.22}px, ${k * 0.7}px)`, zIndex: total - k }}
+          />
+        ))}
+      </div>
+
+      <section className="suits">
+        {SUITS.map((s) => (
+          <div key={s.code} className={"suit" + (s.red ? " red" : "")}>
+            <div className="glyph">{s.glyph}</div>
+            <div className="suit-desc">{s.desc}</div>
+            <div className="cards">
+              {(bySuit.get(s.code) ?? []).map((c) => {
+                const key = `${c.suit}-${c.rank}`;
+                return (
+                  <div key={key} className="deal-card deal-card-flip" data-deal={dealOrder.get(key)}>
+                    <div className="dc-face">
+                      <CardTile suit={c.suit} rank={c.rank} game={c.game} />
+                    </div>
+                    <div className="dc-back">
+                      <img src="/cards/Back-B.png" alt="" />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </section>
+    </div>
+  );
+}

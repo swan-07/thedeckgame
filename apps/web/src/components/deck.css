@@ -6,6 +6,132 @@
   padding: 0.8rem clamp(1rem, 4vw, 3rem) 2rem;
   margin: 0 auto;
 }
+
+/* ── Card dealing animation ───────────────────────────────────── */
+.deal-wrap {
+  position: relative;
+}
+.deal-deck {
+  position: absolute;
+  top: 0;
+  right: clamp(1rem, 4vw, 3rem);
+  width: 110px;
+  aspect-ratio: 2.25 / 3.5;
+  z-index: 1; /* below the flying cards so their flip is visible */
+  opacity: 0; /* hidden until a deal runs */
+  pointer-events: none;
+}
+.deal-deck.deal-deck-left {
+  right: auto;
+  left: clamp(1rem, 4vw, 3rem);
+}
+.deal-deck img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+/* One layer per remaining card — together they give the deck its thickness. */
+.deck-layer {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+.deal-card {
+  will-change: transform, opacity;
+}
+/* The final dealt card flips from back to face while it travels. */
+.deal-card-flip {
+  position: relative;
+  z-index: 2; /* above the deck during flight */
+  transform-style: preserve-3d;
+}
+/* The back is pre-rotated so it reads correctly; which face shows is driven by
+   opacity (flip-show / flip-hide) rather than backface-visibility, which is
+   unreliable through the nested card's own 3D context. */
+.deal-card-flip .dc-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  border-radius: 5px;
+  overflow: hidden;
+  pointer-events: none; /* decorative after the deal — never block card clicks */
+}
+.deal-card-flip .dc-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes deck-in {
+  from {
+    transform: translateX(-32vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes deck-in-left {
+  from {
+    transform: translateX(32vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes deck-peel {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes deal-in-flip {
+  0% {
+    transform: translate(var(--sx, 0px), var(--sy, 0px)) rotateY(180deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  /* Pin edge-on (90deg) to exactly 50% so the face swap lands on the flip. */
+  50% {
+    transform: translate(calc(var(--sx, 0px) / 2), calc(var(--sy, 0px) / 2)) rotateY(90deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotateY(0deg);
+    opacity: 1;
+  }
+}
+/* Card face: hidden for the first half of the flip, shown for the second. */
+@keyframes flip-show {
+  0%,
+  49.9% {
+    opacity: 0;
+  }
+  50%,
+  100% {
+    opacity: 1;
+  }
+}
+/* Card back: shown for the first half of the flip, hidden for the second. */
+@keyframes flip-hide {
+  0%,
+  49.9% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
 @media (max-width: 700px) {
   .suits {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -41,8 +167,9 @@
   opacity: 0.55;
   line-height: 1.5;
   margin: 0 0 1.75rem;
-  min-height: 1.5em;
-  white-space: nowrap;
+  /* Two-line labels: reserve the height so all four columns stay aligned. */
+  min-height: 3em;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,12 +219,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-}
-.flip-front img {
-  filter: grayscale(1) brightness(0.55) contrast(0.9);
-}
-.flip.unlocked .flip-front img {
-  filter: none;
 }
 .flip-back {
   transform: rotateY(180deg);

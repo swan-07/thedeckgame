@@ -127,9 +127,9 @@ export interface FileRegister {
 }
 
 export const SUITS: { code: Suit; glyph: string; name: string; desc: string; red: boolean }[] = [
-  { code: "S", glyph: "♠", name: "Spades", desc: "wild", red: false },
-  { code: "C", glyph: "♣", name: "Clubs", desc: "strategy & trading", red: false },
-  { code: "D", glyph: "♦", name: "Diamonds", desc: "math, cs & research", red: true },
+  { code: "S", glyph: "♠", name: "Spades", desc: "wild & everything else", red: false },
+  { code: "C", glyph: "♣", name: "Clubs", desc: "cs/ai & strategy", red: false },
+  { code: "D", glyph: "♦", name: "Diamonds", desc: "math & intellectual", red: true },
   { code: "H", glyph: "♥", name: "Hearts", desc: "physical & social", red: true },
 ];
 

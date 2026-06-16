@@ -13,9 +13,10 @@ export default function About() {
       <h2>Suits</h2>
       <p className="muted">
         Every card has both a suit and a rank. The suit determines the type of event.{" "}
-        <strong>♣ Clubs</strong> are strategy, negotiation, and trading.{" "}
-        <strong>♦ Diamonds</strong> are math, CS, and research. <strong>♥ Hearts</strong> are
-        physical and endurance. <strong>♠ Spades</strong> are wild cards.
+        <strong>♣ Clubs</strong> are CS, AI, and strategy.{" "}
+        <strong>♦ Diamonds</strong> are math and intellectual challenges.{" "}
+        <strong>♥ Hearts</strong> are physical and social. <strong>♠ Spades</strong> are wild
+        cards — everything else.
       </p>
 
       <h2>Ranks</h2>
