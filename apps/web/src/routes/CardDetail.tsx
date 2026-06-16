@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
-import { useAuth } from "../lib/auth";
 import { api } from "../lib/api";
 import {
   rankLabel,
@@ -14,7 +13,6 @@ import "./card-detail.css";
 
 export default function CardDetail() {
   const { suit: suitName, rank: rankStr } = useParams();
-  const { session } = useAuth();
   const suit = SUIT_FROM_NAME[suitName ?? ""] as Suit | undefined;
   const rank = Number(rankStr);
 
@@ -68,19 +66,11 @@ export default function CardDetail() {
             )}
             <div style={{ marginTop: "2rem" }}>
               {game.status === "published" ? (
-                session ? (
-                  <Link className="btn btn-solid" to={`/apply/${game.id}`}>
-                    Apply
-                  </Link>
-                ) : (
-                  <Link
-                    className="btn btn-solid"
-                    to="/login"
-                    state={{ from: `/apply/${game.id}` }}
-                  >
-                    Sign in to apply
-                  </Link>
-                )
+                // Same UI for everyone; auth is enforced on the apply route,
+                // which sends logged-out users through login first.
+                <Link className="btn btn-solid" to={`/apply/${game.id}`}>
+                  Apply
+                </Link>
               ) : (
                 <span className="muted">Applications are closed.</span>
               )}

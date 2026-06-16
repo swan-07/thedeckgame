@@ -15,7 +15,7 @@ export default function Login() {
       <p className="muted" style={{ margin: "3rem 0 2rem" }}>
         Sign in to apply to events and track your applications.
       </p>
-      <button className="btn btn-solid" onClick={() => signInWithGoogle()}>
+      <button className="btn btn-solid" onClick={() => signInWithGoogle(from)}>
         Continue with Google
       </button>
     </main>

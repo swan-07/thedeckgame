@@ -19,10 +19,13 @@ export const supabase = createClient(url ?? "", publishableKey ?? "", {
   },
 });
 
-export async function signInWithGoogle() {
+export async function signInWithGoogle(next?: string) {
+  // Return the user to where they were headed (e.g. the apply page) after the
+  // OAuth round-trip, which otherwise loses React Router navigation state.
+  const redirectTo = next ? `${window.location.origin}${next}` : window.location.origin;
   return supabase.auth.signInWithOAuth({
     provider: "google",
-    options: { redirectTo: window.location.origin },
+    options: { redirectTo },
   });
 }
 
