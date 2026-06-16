@@ -13,6 +13,7 @@ interface FormState {
   description: string;
   opens_at: string;
   closes_at: string;
+  game_date: string;
   question_schema: Question[];
 }
 
@@ -23,6 +24,7 @@ const EMPTY: FormState = {
   description: "",
   opens_at: "",
   closes_at: "",
+  game_date: "",
   question_schema: [],
 };
 
@@ -64,6 +66,7 @@ export default function GameEditor() {
         description: g.description,
         opens_at: isoToLocalInput(g.opens_at),
         closes_at: isoToLocalInput(g.closes_at),
+        game_date: isoToLocalInput(g.game_date),
         question_schema: g.question_schema,
       });
     }
@@ -85,6 +88,7 @@ export default function GameEditor() {
       description: form.description,
       opens_at: localInputToIso(form.opens_at),
       closes_at: localInputToIso(form.closes_at),
+      game_date: localInputToIso(form.game_date),
     };
     const structural = {
       suit: form.suit,
@@ -188,6 +192,15 @@ export default function GameEditor() {
             />
           </label>
         </div>
+
+        <label className="field">
+          <span>Game date (when it's hosted)</span>
+          <input
+            type="datetime-local"
+            value={form.game_date}
+            onChange={(e) => set("game_date", e.target.value)}
+          />
+        </label>
 
         <h3 style={{ marginTop: "2rem", fontSize: "1rem" }}>Application questions</h3>
         <QuestionBuilder

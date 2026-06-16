@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
 import { api } from "../lib/api";
+import { gameDate } from "../lib/games";
 import {
   rankLabel,
   SUITS,
@@ -51,6 +52,10 @@ export default function CardDetail() {
             <div className="row">
               <div className="label">Game</div>
               <div>{game.title}</div>
+            </div>
+            <div className="row">
+              <div className="label">Date</div>
+              <div>{gameDate(game)}</div>
             </div>
             <div className="row">
               <div className="label">Status</div>

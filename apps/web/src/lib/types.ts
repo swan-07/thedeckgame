@@ -55,6 +55,7 @@ export interface GamePublic {
   question_schema: Question[];
   opens_at: string | null;
   closes_at: string | null;
+  game_date: string | null;
 }
 
 export interface GameSummary {

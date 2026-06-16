@@ -29,6 +29,7 @@ class GameBase(BaseModel):
     question_schema: list[Question] = []
     opens_at: datetime | None = None
     closes_at: datetime | None = None
+    game_date: datetime | None = None
 
 
 class GameCreate(GameBase):
@@ -43,6 +44,7 @@ class GameUpdate(BaseModel):
     question_schema: list[Question] | None = None
     opens_at: datetime | None = None
     closes_at: datetime | None = None
+    game_date: datetime | None = None
 
 
 class GameSummary(BaseModel):
@@ -73,6 +75,7 @@ class GameDetail(BaseModel):
     question_schema: list
     opens_at: datetime | None
     closes_at: datetime | None
+    game_date: datetime | None
     created_at: datetime
     updated_at: datetime
 
@@ -91,3 +94,4 @@ class GamePublic(BaseModel):
     question_schema: list
     opens_at: datetime | None
     closes_at: datetime | None
+    game_date: datetime | None

@@ -88,6 +88,8 @@ class Game(Base):
     question_schema: Mapped[list] = mapped_column(JSONB, default=list, nullable=False)
     opens_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     closes_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # The date the game itself is hosted (distinct from the application window).
+    game_date: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     # Soft delete: non-null means archived. Hidden from applicants, recoverable
     # by admins. The game keeps its status so restore returns it as it was.
     deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
