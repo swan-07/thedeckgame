@@ -118,9 +118,12 @@ export function SuitGrid({
                     <div className="dc-face">
                       <CardTile suit={c.suit} rank={c.rank} game={c.game} />
                     </div>
-                    <div className="dc-back">
-                      <img src="/cards/Back-B.png" alt="" />
-                    </div>
+                    {/* Only present when a deal runs; otherwise it would cover the face. */}
+                    {dealToken > 0 && (
+                      <div className="dc-back">
+                        <img src="/cards/Back-B.png" alt="" />
+                      </div>
+                    )}
                   </div>
                 );
               })}

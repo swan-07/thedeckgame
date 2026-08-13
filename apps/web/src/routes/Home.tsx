@@ -1,11 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 import { CardTile } from "../components/CardTile";
 import { SuitGrid } from "../components/SuitGrid";
-import { api } from "../lib/api";
+import { GAMES } from "../lib/deckData";
 import { classifyGames, gameDate } from "../lib/games";
-import { SUITS, type GamePublic } from "../lib/types";
+import { SUITS } from "../lib/types";
 import "./home.css";
 
 type View = "center" | "left" | "right";
@@ -102,18 +101,8 @@ function PanelBar({
 
 export default function Home() {
   const [view, setView] = useState<View>("center");
-  // Bumped each time a side opens so its grid replays the dealing animation.
-  const [leftDeal, setLeftDeal] = useState(0);
-  const [rightDeal, setRightDeal] = useState(0);
-
-  const openLeft = () => {
-    setView("left");
-    setLeftDeal((n) => n + 1);
-  };
-  const openRight = () => {
-    setView("right");
-    setRightDeal((n) => n + 1);
-  };
+  const openLeft = () => setView("left");
+  const openRight = () => setView("right");
 
   // Clicking the "The Deck Game" logo returns to the center view.
   useEffect(() => {
@@ -122,14 +111,7 @@ export default function Home() {
     return () => window.removeEventListener("deck:home", toCenter);
   }, []);
 
-  const { data: games, isLoading } = useQuery({
-    queryKey: ["games", "public"],
-    queryFn: () => api<GamePublic[]>("/games", { auth: false }),
-  });
-
-  if (isLoading) return <div className="spinner" />;
-
-  const { active, completed, unused } = classifyGames(games ?? []);
+  const { active, completed, unused } = classifyGames(GAMES);
   const offset = view === "left" ? "0%" : view === "right" ? "-200%" : "-100%";
 
   return (
@@ -140,7 +122,7 @@ export default function Home() {
         {/* LEFT — completed games */}
         <section className="deck-panel">
           <PanelBar title="Completed games" onBack={() => setView("center")} backSide="right" />
-          <SuitGrid cells={completed} dealToken={leftDeal} />
+          <SuitGrid cells={completed} dealToken={0} />
         </section>
 
         {/* CENTER — face-down cards flanking the open games */}
@@ -181,7 +163,7 @@ export default function Home() {
           {/* RIGHT — upcoming / unrevealed cards */}
           <section className="deck-panel">
             <PanelBar title="Upcoming cards" onBack={() => setView("center")} backSide="left" />
-            <SuitGrid cells={unused} dealToken={rightDeal} origin="left" />
+            <SuitGrid cells={unused} dealToken={0} origin="left" />
           </section>
         </div>
       </div>
@@ -191,10 +173,10 @@ export default function Home() {
         <div className="partners-inner">
           <h2>Partners</h2>
           <p className="muted">
-            Want to partner on a card? Back an event and put your name on it.
+            Email us if you&rsquo;re interested in sponsoring a card:
           </p>
-          <a className="btn btn-solid" href="mailto:hosts@thedeckgame.com">
-            hosts@thedeckgame.com
+          <a className="btn btn-solid" href="mailto:deckgamehost@gmail.com">
+            deckgamehost@gmail.com
           </a>
         </div>
       </section>

@@ -1,15 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 
-import { api } from "../lib/api";
+import { GAMES } from "../lib/deckData";
 import { gameDate } from "../lib/games";
-import {
-  rankLabel,
-  SUITS,
-  SUIT_FROM_NAME,
-  type GamePublic,
-  type Suit,
-} from "../lib/types";
+import { rankLabel, SUITS, SUIT_FROM_NAME, type Suit } from "../lib/types";
 import "./card-detail.css";
 
 export default function CardDetail() {
@@ -17,14 +10,7 @@ export default function CardDetail() {
   const suit = SUIT_FROM_NAME[suitName ?? ""] as Suit | undefined;
   const rank = Number(rankStr);
 
-  const { data: games, isLoading } = useQuery({
-    queryKey: ["games", "public"],
-    queryFn: () => api<GamePublic[]>("/games", { auth: false }),
-  });
-
-  if (isLoading) return <div className="spinner" />;
-
-  const game = (games ?? []).find((g) => g.suit === suit && g.rank === rank);
+  const game = GAMES.find((g) => g.suit === suit && g.rank === rank);
   const suitMeta = SUITS.find((s) => s.code === suit);
 
   if (!suit || !suitMeta) return <main className="narrow center"><p>Unknown card.</p></main>;
@@ -71,11 +57,14 @@ export default function CardDetail() {
             )}
             <div style={{ marginTop: "2rem" }}>
               {game.status === "published" ? (
-                // Same UI for everyone; auth is enforced on the apply route,
-                // which sends logged-out users through login first.
-                <Link className="btn btn-solid" to={`/apply/${game.id}`}>
+                <a
+                  className="btn btn-solid"
+                  href={`mailto:deckgamehost@gmail.com?subject=${encodeURIComponent(
+                    `Applying: ${game.title}`,
+                  )}`}
+                >
                   Apply
-                </Link>
+                </a>
               ) : (
                 <span className="muted">Applications are closed.</span>
               )}
