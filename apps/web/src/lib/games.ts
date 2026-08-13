@@ -9,7 +9,7 @@ export interface Cell {
 /** Display date for a game — the date it's hosted (its game date). */
 export function gameDate(g: GamePublic): string {
   const iso = g.game_date ?? g.opens_at ?? g.closes_at;
-  if (!iso) return "Date TBA";
+  if (!iso) return "???";
   return new Date(iso).toLocaleDateString(undefined, {
     month: "short",
     day: "numeric",
