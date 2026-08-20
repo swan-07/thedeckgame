@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /waiver
+Disallow: /waiver.pdf
 
 Sitemap: https://thedeckgame.com/sitemap.xml
