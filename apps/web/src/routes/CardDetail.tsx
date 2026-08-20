@@ -59,9 +59,15 @@ export default function CardDetail() {
               {game.status === "published" ? (
                 <a
                   className="btn btn-solid"
-                  href={`mailto:deckgamehost@gmail.com?subject=${encodeURIComponent(
-                    `Applying: ${game.title}`,
-                  )}`}
+                  href={
+                    game.apply_url ??
+                    `mailto:deckgamehost@gmail.com?subject=${encodeURIComponent(
+                      `Applying: ${game.title}`,
+                    )}`
+                  }
+                  {...(game.apply_url
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                 >
                   Apply
                 </a>

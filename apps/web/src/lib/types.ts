@@ -12,6 +12,8 @@ export interface GamePublic {
   opens_at: string | null;
   closes_at: string | null;
   game_date: string | null;
+  /** External application link (e.g. Partiful). Falls back to email when absent. */
+  apply_url?: string | null;
 }
 
 export const SUITS: { code: Suit; glyph: string; name: string; desc: string; red: boolean }[] = [

@@ -13,11 +13,12 @@ export const GAMES: GamePublic[] = [
     id: "s-5",
     suit: "S",
     rank: 5,
-    title: "???",
+    title: "Common Knowledge",
     description: "The inaugural event.",
     status: "published",
     opens_at: null,
     closes_at: null,
     game_date: null,
+    apply_url: "https://partiful.com/e/j44JumdnugCLU8vgeWnJ",
   },
 ];
