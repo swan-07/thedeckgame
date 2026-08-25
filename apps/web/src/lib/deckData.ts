@@ -18,7 +18,7 @@ export const GAMES: GamePublic[] = [
     status: "published",
     opens_at: null,
     closes_at: null,
-    game_date: null,
+    game_date: "2026-09-05",
     apply_url: "https://partiful.com/e/j44JumdnugCLU8vgeWnJ",
   },
 ];

@@ -10,7 +10,9 @@ export interface Cell {
 export function gameDate(g: GamePublic): string {
   const iso = g.game_date ?? g.opens_at ?? g.closes_at;
   if (!iso) return "Date TBA";
-  return new Date(iso).toLocaleDateString(undefined, {
+  // Date-only strings parse as UTC midnight; pin them to local time so the
+  // displayed day doesn't shift west of Greenwich.
+  return new Date(iso.length === 10 ? `${iso}T00:00:00` : iso).toLocaleDateString(undefined, {
     month: "short",
     day: "numeric",
     year: "numeric",
