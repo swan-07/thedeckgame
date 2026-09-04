@@ -14,6 +14,10 @@ export interface GamePublic {
   game_date: string | null;
   /** External application link (e.g. Partiful). Falls back to email when absent. */
   apply_url?: string | null;
+  /** Event sponsors, shown on the card. */
+  sponsors?: string[];
+  /** Winner's name once the event is done; null while unknown. */
+  winner?: string | null;
 }
 
 export const SUITS: { code: Suit; glyph: string; name: string; desc: string; red: boolean }[] = [

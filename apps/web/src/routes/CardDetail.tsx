@@ -49,6 +49,16 @@ export default function CardDetail() {
                 <span className={`badge ${game.status}`}>{game.status}</span>
               </div>
             </div>
+            {game.sponsors?.length ? (
+              <div className="row">
+                <div className="label">Sponsor</div>
+                <div>{game.sponsors.join(" · ")}</div>
+              </div>
+            ) : null}
+            <div className="row">
+              <div className="label">Winner</div>
+              <div>{game.winner ?? <span className="muted">TBD</span>}</div>
+            </div>
             {game.description && (
               <div className="row">
                 <div className="label">About</div>

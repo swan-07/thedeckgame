@@ -38,8 +38,20 @@ export function CardTile({ suit, rank, game }: Props) {
         <div className="flip-face flip-back">
           {game ? (
             <div className="info">
-              <span>Game</span>
-              {game.title}
+              <div className="info-item">
+                <span>Game</span>
+                {game.title}
+              </div>
+              {game.sponsors?.length ? (
+                <div className="info-item">
+                  <span>Sponsor</span>
+                  {game.sponsors[0]}
+                </div>
+              ) : null}
+              <div className="info-item">
+                <span>Winner</span>
+                {game.winner ?? "TBD"}
+              </div>
             </div>
           ) : (
             "Coming Soon"

@@ -20,5 +20,7 @@ export const GAMES: GamePublic[] = [
     closes_at: null,
     game_date: "2026-09-05",
     apply_url: "https://partiful.com/e/j44JumdnugCLU8vgeWnJ",
+    sponsors: ["Jane Street", "ZFellows", "Red Bull"],
+    winner: null,
   },
 ];
