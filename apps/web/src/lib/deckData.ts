@@ -23,5 +23,6 @@ export const GAMES: GamePublic[] = [
     sponsors: ["Jane Street", "ZFellows", "Red Bull"],
     winner: "Habib Rahman",
     winner_url: "https://www.linkedin.com/in/habib-swe",
+    photos_url: "https://photos.app.goo.gl/KKhyaxqtWxmuVKmL6",
   },
 ];

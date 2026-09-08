@@ -20,6 +20,8 @@ export interface GamePublic {
   winner?: string | null;
   /** Optional link on the winner's name (e.g. LinkedIn). */
   winner_url?: string | null;
+  /** Optional photo album link for a completed event. */
+  photos_url?: string | null;
 }
 
 export const SUITS: { code: Suit; glyph: string; name: string; desc: string; red: boolean }[] = [

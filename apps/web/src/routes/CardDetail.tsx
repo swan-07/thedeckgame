@@ -87,6 +87,16 @@ export default function CardDetail() {
                 </div>
               </div>
             )}
+            {game.photos_url && (
+              <div className="row">
+                <div className="label">Photos</div>
+                <div>
+                  <a href={game.photos_url} target="_blank" rel="noopener noreferrer">
+                    Google Photos
+                  </a>
+                </div>
+              </div>
+            )}
             <div style={{ marginTop: "2rem" }}>
               {game.status === "published" ? (
                 <a
