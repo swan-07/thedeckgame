@@ -12,6 +12,11 @@ export function Layout({ children }: { children: ReactNode }) {
             The Deck Game
           </Link>
         </h1>
+        <nav className="site-nav">
+          <Link to="/games" data-active={pathname.startsWith("/games")}>
+            Games
+          </Link>
+        </nav>
       </header>
       <div className={"shell-content" + (pathname === "/" ? " snap" : "")}>{children}</div>
     </div>

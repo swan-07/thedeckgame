@@ -1,0 +1,133 @@
+.games-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) 1.25rem 4rem;
+}
+.games-h {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  letter-spacing: 0.04em;
+  margin: 0 0 0.4rem;
+}
+.games-intro {
+  margin: 0 0 2rem;
+  max-width: 46ch;
+}
+
+/* Index list */
+.games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.game-card {
+  display: block;
+  text-decoration: none;
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+.game-card:hover {
+  border-color: var(--red);
+  transform: translateY(-2px);
+}
+.game-card-name {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+}
+.game-card-tag {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+}
+.game-card-meta {
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 0.7rem;
+}
+
+/* Detail */
+.game-head {
+  margin-bottom: 2rem;
+}
+.game-tag {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--fg);
+  margin: 0.1rem 0 0;
+}
+.game-origin {
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0.5rem 0 0;
+}
+.game-section {
+  margin-bottom: 2.4rem;
+}
+.game-section h3 {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.5rem;
+  margin: 0 0 1rem;
+}
+.game-p {
+  line-height: 1.65;
+  margin: 0 0 0.9rem;
+}
+.game-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.6rem;
+}
+.game-shot img {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  display: block;
+}
+.game-instances {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.game-instance {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.2rem 1rem;
+  align-items: baseline;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+}
+.gi-event {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+}
+.gi-event a {
+  color: var(--fg);
+}
+.gi-date {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: right;
+}
+.gi-result {
+  grid-column: 1 / -1;
+  color: var(--red);
+  font-size: 0.95rem;
+  margin-top: 0.15rem;
+}
+.gi-result .muted {
+  color: var(--muted);
+}
