@@ -18,13 +18,15 @@ export interface GamePublic {
   sponsors?: string[];
   /** Winner's name once the event is done; null while unknown. */
   winner?: string | null;
+  /** Optional link on the winner's name (e.g. LinkedIn). */
+  winner_url?: string | null;
 }
 
 export const SUITS: { code: Suit; glyph: string; name: string; desc: string; red: boolean }[] = [
-  { code: "S", glyph: "♠", name: "Spades", desc: "wild & everything else", red: false },
-  { code: "C", glyph: "♣", name: "Clubs", desc: "cs/ai & strategy", red: false },
-  { code: "D", glyph: "♦", name: "Diamonds", desc: "math & intellectual", red: true },
-  { code: "H", glyph: "♥", name: "Hearts", desc: "physical & social", red: true },
+  { code: "S", glyph: "♠", name: "Spades", desc: "problem solving", red: false },
+  { code: "C", glyph: "♣", name: "Clubs", desc: "computation", red: false },
+  { code: "D", glyph: "♦", name: "Diamonds", desc: "intelligence", red: true },
+  { code: "H", glyph: "♥", name: "Hearts", desc: "physical", red: true },
 ];
 
 // 2..10, J(11), Q(12), K(13), A(1)

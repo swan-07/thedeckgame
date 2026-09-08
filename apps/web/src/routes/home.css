@@ -116,6 +116,27 @@
   text-transform: uppercase;
   color: var(--fg);
 }
+/* Placeholder shown in the center when no game is currently open. */
+.mystery-card {
+  width: 120px;
+  aspect-ratio: 2.25 / 3.5;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 3rem;
+  color: var(--gold);
+}
+@media (max-width: 700px) {
+  .mystery-card {
+    width: 100%;
+    max-width: 140px;
+    margin: 0 auto;
+  }
+}
 
 /* ── Face-down back cards ─────────────────────────────────────── */
 .back-card {

@@ -50,7 +50,22 @@ export function CardTile({ suit, rank, game }: Props) {
               ) : null}
               <div className="info-item">
                 <span>Winner</span>
-                {game.winner ?? "TBD"}
+                {game.winner ? (
+                  game.winner_url ? (
+                    <a
+                      href={game.winner_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {game.winner}
+                    </a>
+                  ) : (
+                    game.winner
+                  )
+                ) : (
+                  "TBD"
+                )}
               </div>
             </div>
           ) : (

@@ -137,7 +137,7 @@ export default function Home() {
 
             <div className="center-games">
               <h2 className="center-h">Apply</h2>
-              {active.length > 0 && (
+              {active.length > 0 ? (
                 <div className="active-row">
                   {active.map((g) => (
                     <div key={g.id} className="open-card">
@@ -145,6 +145,15 @@ export default function Home() {
                       <div className="open-date">{gameDate(g)}</div>
                     </div>
                   ))}
+                </div>
+              ) : (
+                <div className="active-row">
+                  <div className="open-card">
+                    <div className="mystery-card" aria-label="Next game to be announced">
+                      ?
+                    </div>
+                    <div className="open-date">TBD</div>
+                  </div>
                 </div>
               )}
             </div>

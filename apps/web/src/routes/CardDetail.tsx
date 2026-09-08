@@ -57,12 +57,34 @@ export default function CardDetail() {
             ) : null}
             <div className="row">
               <div className="label">Winner</div>
-              <div>{game.winner ?? <span className="muted">TBD</span>}</div>
+              <div>
+                {game.winner ? (
+                  game.winner_url ? (
+                    <a href={game.winner_url} target="_blank" rel="noopener noreferrer">
+                      {game.winner}
+                    </a>
+                  ) : (
+                    game.winner
+                  )
+                ) : (
+                  <span className="muted">TBD</span>
+                )}
+              </div>
             </div>
             {game.description && (
               <div className="row">
                 <div className="label">About</div>
                 <div>{game.description}</div>
+              </div>
+            )}
+            {game.apply_url && (
+              <div className="row">
+                <div className="label">Link</div>
+                <div>
+                  <a href={game.apply_url} target="_blank" rel="noopener noreferrer">
+                    Partiful
+                  </a>
+                </div>
               </div>
             )}
             <div style={{ marginTop: "2rem" }}>
