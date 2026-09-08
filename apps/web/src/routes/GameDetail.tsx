@@ -28,9 +28,14 @@ export default function GameDetail() {
     <main className="games-page">
       <h2 className="games-h">{game.name}</h2>
 
-      {game.images && game.images.length > 0 ? (
-        <section className="game-section">
-          <h3>How it's played</h3>
+      <section className="game-section">
+        <h3>How it's played</h3>
+        {game.how.map((p, i) => (
+          <p key={i} className="game-p">
+            {p}
+          </p>
+        ))}
+        {game.images && game.images.length > 0 ? (
           <div className="game-gallery">
             {game.images.map((src, i) => (
               <a key={i} href={src} target="_blank" rel="noopener noreferrer" className="game-shot">
@@ -38,8 +43,8 @@ export default function GameDetail() {
               </a>
             ))}
           </div>
-        </section>
-      ) : null}
+        ) : null}
+      </section>
 
       <section className="game-section">
         <h3>Results</h3>
