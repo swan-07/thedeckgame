@@ -23,10 +23,10 @@ export interface GamePublic {
 }
 
 export const SUITS: { code: Suit; glyph: string; name: string; desc: string; red: boolean }[] = [
-  { code: "S", glyph: "♠", name: "Spades", desc: "problem solving", red: false },
-  { code: "C", glyph: "♣", name: "Clubs", desc: "computation", red: false },
-  { code: "D", glyph: "♦", name: "Diamonds", desc: "intelligence", red: true },
-  { code: "H", glyph: "♥", name: "Hearts", desc: "physical", red: true },
+  { code: "S", glyph: "♠", name: "Spades", desc: "spirit", red: false },
+  { code: "C", glyph: "♣", name: "Clubs", desc: "machine", red: false },
+  { code: "D", glyph: "♦", name: "Diamonds", desc: "mind", red: true },
+  { code: "H", glyph: "♥", name: "Hearts", desc: "body", red: true },
 ];
 
 // 2..10, J(11), Q(12), K(13), A(1)
