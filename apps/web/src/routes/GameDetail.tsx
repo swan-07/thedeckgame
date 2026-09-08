@@ -55,9 +55,26 @@ export default function GameDetail() {
                 {inst.card ? <Link to={`/card/${inst.card}`}>{inst.event}</Link> : inst.event}
               </div>
               <div className="gi-date">{fmtDate(inst.date)}</div>
-              <div className="gi-result">
-                {inst.result ? inst.result : <span className="muted">result to come</span>}
-              </div>
+              {inst.result ? <div className="gi-result">{inst.result}</div> : null}
+              {inst.detail ? (
+                <div className="gi-detail">
+                  {inst.detail.map((b, j) => (
+                    <div className="gi-block" key={j}>
+                      <div className="gi-block-title">{b.title}</div>
+                      {b.lines.map((l, k) => (
+                        <div className="gi-line" key={k}>
+                          {l}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+              {!inst.result && !inst.detail ? (
+                <div className="gi-result">
+                  <span className="muted">result to come</span>
+                </div>
+              ) : null}
             </div>
           ))}
         </div>

@@ -6,6 +6,8 @@ export interface GameInstance {
   card?: string; // card page slug, e.g. "spades/5"
   date: string; // ISO
   result?: string | null;
+  /** Optional richer breakdown (e.g. Contraband matchups, round by round). */
+  detail?: { title: string; lines: string[] }[];
 }
 
 export interface PlayedGame {
@@ -31,7 +33,37 @@ export const PLAYED_GAMES: PlayedGame[] = [
       "Pairs reveal in order (1 and 2, then 3 and 4, then 5 and 6), then the teams swap roles and play again. Any chips left in a treasury at the end are given to the opposing team.",
     ],
     images: [],
-    instances: [{ event: "5 of Spades", card: "spades/5", date: "2026-09-05", result: null }],
+    instances: [
+      {
+        event: "5 of Spades",
+        card: "spades/5",
+        date: "2026-09-05",
+        result: null,
+        detail: [
+          {
+            title: "Team 1 vs Team 2",
+            lines: [
+              "Round 1: Team 1 smuggled nothing and bluffed. Team 2 doubted, guessing 10, and lost. Team 1 +50, Team 2 -50 each.",
+              "Round 2: Team 2 smuggled all 10 chips. Team 1 passed and let it through. Team 2 +100 each.",
+            ],
+          },
+          {
+            title: "Team 3 vs Team 4",
+            lines: [
+              "Round 1: Team 3 bluffed with nothing. Team 4 doubted, guessing 10, and lost. Team 3 +50, Team 4 -50 each.",
+              "Round 2: Team 4 bluffed with nothing. Team 3 doubted, guessing 10, and lost. Team 4 +50, Team 3 -50 each.",
+            ],
+          },
+          {
+            title: "Team 5 vs Team 6",
+            lines: [
+              "Round 1: Team 5 smuggled nothing. Team 6 passed. Nothing gained.",
+              "Round 2: Team 6 smuggled 3 chips. Team 5 doubted, guessing 10, and caught them. Team 5 +30 each.",
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "garden-of-eden",
@@ -63,7 +95,13 @@ export const PLAYED_GAMES: PlayedGame[] = [
     ],
     images: [],
     instances: [
-      { event: "5 of Spades", card: "spades/5", date: "2026-09-05", result: "Five syndicates formed." },
+      {
+        event: "5 of Spades",
+        card: "spades/5",
+        date: "2026-09-05",
+        result:
+          "Five syndicates formed: 1025 (41 stars), 925 (37 stars), 675 (27 stars), 650 (26 stars), 550 (22 stars).",
+      },
     ],
   },
   {

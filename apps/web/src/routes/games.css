@@ -131,3 +131,21 @@
 .gi-result .muted {
   color: var(--muted);
 }
+.gi-detail {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.gi-block-title {
+  font-family: var(--serif);
+  color: var(--fg);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+.gi-line {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
