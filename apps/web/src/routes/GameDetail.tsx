@@ -26,28 +26,15 @@ export default function GameDetail() {
 
   return (
     <main className="games-page">
-      <div className="game-head">
-        <h2 className="games-h">{game.name}</h2>
-        <p className="game-tag">{game.tagline}</p>
-        {game.origin ? <p className="game-origin">{game.origin}</p> : null}
-      </div>
-
-      <section className="game-section">
-        <h3>How it's played</h3>
-        {game.how.map((p, i) => (
-          <p key={i} className="game-p">
-            {p}
-          </p>
-        ))}
-      </section>
+      <h2 className="games-h">{game.name}</h2>
 
       {game.images && game.images.length > 0 ? (
         <section className="game-section">
-          <h3>In the 5 of Spades</h3>
+          <h3>How it's played</h3>
           <div className="game-gallery">
             {game.images.map((src, i) => (
               <a key={i} href={src} target="_blank" rel="noopener noreferrer" className="game-shot">
-                <img src={src} alt={`${game.name} — how it was played, ${i + 1}`} loading="lazy" />
+                <img src={src} alt={`${game.name}, ${i + 1}`} loading="lazy" />
               </a>
             ))}
           </div>
@@ -55,7 +42,7 @@ export default function GameDetail() {
       ) : null}
 
       <section className="game-section">
-        <h3>Playings</h3>
+        <h3>Results</h3>
         <div className="game-instances">
           {game.instances.map((inst, i) => (
             <div key={i} className="game-instance">
