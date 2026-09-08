@@ -128,7 +128,7 @@
   justify-content: center;
   font-family: var(--serif);
   font-size: 3rem;
-  color: var(--gold);
+  color: var(--fg);
 }
 @media (max-width: 700px) {
   .mystery-card {
