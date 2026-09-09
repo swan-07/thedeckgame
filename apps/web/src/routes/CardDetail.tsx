@@ -39,7 +39,7 @@ export default function CardDetail() {
               <div>{suitMeta.name}</div>
             </div>
             <div className="row">
-              <div className="label">Game</div>
+              <div className="label">Title</div>
               <div>{game.title}</div>
             </div>
             {cardGames.length ? (
