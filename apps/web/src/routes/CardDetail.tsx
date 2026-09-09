@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
 import { GAMES } from "../lib/deckData";
+import { PLAYED_GAMES } from "../lib/gamesPlayed";
 import { gameDate } from "../lib/games";
 import { rankLabel, SUITS, SUIT_FROM_NAME, type Suit } from "../lib/types";
 import "./card-detail.css";
@@ -16,6 +17,8 @@ export default function CardDetail() {
   if (!suit || !suitMeta) return <main className="narrow center"><p>Unknown card.</p></main>;
 
   const cardName = `${rankLabel(rank)} of ${suitMeta.name}`;
+  const cardSlug = `${suitName}/${rank}`;
+  const cardGames = PLAYED_GAMES.filter((g) => g.instances.some((inst) => inst.card === cardSlug));
 
   return (
     <main className="card-detail">
@@ -39,6 +42,19 @@ export default function CardDetail() {
               <div className="label">Game</div>
               <div>{game.title}</div>
             </div>
+            {cardGames.length ? (
+              <div className="row">
+                <div className="label">Games</div>
+                <div>
+                  {cardGames.map((g, i) => (
+                    <span key={g.slug}>
+                      {i > 0 ? " · " : ""}
+                      <Link to={`/games/${g.slug}`}>{g.name}</Link>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             <div className="row">
               <div className="label">Date</div>
               <div>{gameDate(game)}</div>
