@@ -10,6 +10,19 @@ import type { GamePublic } from "./types";
  */
 export const GAMES: GamePublic[] = [
   {
+    id: "s-4",
+    suit: "S",
+    rank: 4,
+    title: "TBA",
+    description: "",
+    status: "published",
+    opens_at: null,
+    closes_at: null,
+    game_date: "2026-11-07",
+    sponsors: ["Swan Fellows", "MATS", "BlueDot"],
+    winner: null,
+  },
+  {
     id: "s-5",
     suit: "S",
     rank: 5,
