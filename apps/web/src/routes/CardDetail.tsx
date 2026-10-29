@@ -121,21 +121,20 @@ export default function CardDetail() {
               </div>
             )}
             <div style={{ marginTop: "2rem" }}>
-              {game.status === "published" ? (
+              {game.status === "published" && game.apply_url ? (
                 <a
                   className="btn btn-solid"
-                  href={
-                    game.apply_url ??
-                    `mailto:deckgamehost@gmail.com?subject=${encodeURIComponent(
-                      `Applying: ${game.title}`,
-                    )}`
-                  }
-                  {...(game.apply_url
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
+                  href={game.apply_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Apply
                 </a>
+              ) : game.status === "published" ? (
+                // Grayed out until the card has its application link.
+                <button className="btn btn-ghost" type="button" disabled>
+                  Apply
+                </button>
               ) : (
                 <span className="muted">Applications are closed.</span>
               )}
