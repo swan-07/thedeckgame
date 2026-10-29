@@ -190,8 +190,8 @@ export default function Home() {
           <p className="muted">
             Email us if you&rsquo;re interested in sponsoring a card:
           </p>
-          <a className="btn btn-solid" href="mailto:deckgamehost@gmail.com">
-            deckgamehost@gmail.com
+          <a className="btn btn-solid" href="mailto:hosts@thedeckgame.com">
+            hosts@thedeckgame.com
           </a>
         </div>
       </section>
