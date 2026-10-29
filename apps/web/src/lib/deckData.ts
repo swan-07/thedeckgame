@@ -28,7 +28,7 @@ export const GAMES: GamePublic[] = [
     status: "published",
     opens_at: null,
     closes_at: null,
-    game_date: "2026-11-07",
+    game_date: "2026-11-06",
     location: "Berkeley // UC Berkeley",
     sponsors: ["Swan Fellows", "MATS", "BlueDot"],
     winner: null,
