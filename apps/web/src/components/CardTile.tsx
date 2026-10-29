@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { SUIT_NAME, type GamePublic, type Suit } from "../lib/types";
+import { SponsorName } from "./SponsorName";
 
 interface Props {
   suit: Suit;
@@ -45,7 +46,7 @@ export function CardTile({ suit, rank, game }: Props) {
               {game.sponsors?.length ? (
                 <div className="info-item">
                   <span>Sponsor</span>
-                  {game.sponsors[0]}
+                  <SponsorName name={game.sponsors[0]} />
                 </div>
               ) : null}
               <div className="info-item">

@@ -8,6 +8,16 @@ import type { GamePublic } from "./types";
  * status: "published" while applications are open, "closed" once it's done.
  * game_date is an ISO date (YYYY-MM-DD).
  */
+/** Sponsor websites. A name in a game's `sponsors` links here when listed. */
+export const SPONSOR_URLS: Record<string, string> = {
+  "Jane Street": "https://www.janestreet.com",
+  ZFellows: "https://www.zfellows.com",
+  "Red Bull": "https://www.redbull.com",
+  "Swan Fellows": "https://swanfellows.com",
+  MATS: "https://www.matsprogram.org",
+  BlueDot: "https://bluedot.org",
+};
+
 export const GAMES: GamePublic[] = [
   {
     id: "s-4",

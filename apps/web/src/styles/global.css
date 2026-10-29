@@ -192,6 +192,16 @@ main {
   flex: 0 0 auto;
   justify-content: center;
 }
+.btn-notify {
+  background: #d4d4d4;
+  border-color: #d4d4d4;
+  color: #000;
+}
+.btn-notify:hover {
+  background: #fff;
+  border-color: #fff;
+  color: #000;
+}
 @media (max-width: 700px) {
   .notify-form .btn {
     flex-basis: 100%;

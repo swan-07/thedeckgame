@@ -54,7 +54,7 @@ export function NotifySignup({ source }: { source: string }) {
         value={website}
         onChange={(e) => setWebsite(e.target.value)}
       />
-      <button className="btn btn-solid" type="submit" disabled={status === "sending"}>
+      <button className="btn btn-notify" type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Sending" : "Notify me"}
       </button>
       {status === "error" && <p className="notify-error">{error}</p>}

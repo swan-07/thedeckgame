@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
 import { NotifySignup } from "../components/NotifySignup";
+import { SponsorName } from "../components/SponsorName";
 import { GAMES } from "../lib/deckData";
 import { PLAYED_GAMES } from "../lib/gamesPlayed";
 import { gameDate } from "../lib/games";
@@ -75,7 +76,14 @@ export default function CardDetail() {
             {game.sponsors?.length ? (
               <div className="row">
                 <div className="label">Sponsor</div>
-                <div>{game.sponsors.join(" · ")}</div>
+                <div>
+                  {game.sponsors.map((s, i) => (
+                    <span key={s}>
+                      {i > 0 ? " · " : ""}
+                      <SponsorName name={s} />
+                    </span>
+                  ))}
+                </div>
               </div>
             ) : null}
             <div className="row">
