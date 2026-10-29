@@ -38,6 +38,12 @@
   text-transform: uppercase;
   opacity: 0.5;
 }
+.card-notify {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 2.5rem;
+}
 .back-link {
   display: inline-block;
   margin-top: 2rem;

@@ -14,6 +14,8 @@ export interface GamePublic {
   game_date: string | null;
   /** External application link (e.g. Partiful). Falls back to email when absent. */
   apply_url?: string | null;
+  /** Where it's held and the school it draws from, e.g. "NYC // Yale". */
+  location?: string | null;
   /** Event sponsors, shown on the card. */
   sponsors?: string[];
   /** Winner's name once the event is done; null while unknown. */

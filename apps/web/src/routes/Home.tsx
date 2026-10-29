@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { CardTile } from "../components/CardTile";
+import { NotifySignup } from "../components/NotifySignup";
 import { SuitGrid } from "../components/SuitGrid";
 import { GAMES } from "../lib/deckData";
 import { classifyGames, gameDate } from "../lib/games";
@@ -179,6 +180,11 @@ export default function Home() {
       </section>
 
       <section className="snap-page partners-page">
+        <div className="partners-inner">
+          <h2>Get notified</h2>
+          <p className="muted">Be notified for future Deck Game events.</p>
+          <NotifySignup source="home" />
+        </div>
         <div className="partners-inner">
           <h2>Partners</h2>
           <p className="muted">

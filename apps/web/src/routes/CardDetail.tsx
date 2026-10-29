@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
+import { NotifySignup } from "../components/NotifySignup";
 import { GAMES } from "../lib/deckData";
 import { PLAYED_GAMES } from "../lib/gamesPlayed";
 import { gameDate } from "../lib/games";
@@ -59,6 +60,12 @@ export default function CardDetail() {
               <div className="label">Date</div>
               <div>{gameDate(game)}</div>
             </div>
+            {game.location ? (
+              <div className="row">
+                <div className="label">Location</div>
+                <div>{game.location}</div>
+              </div>
+            ) : null}
             <div className="row">
               <div className="label">Status</div>
               <div>
@@ -132,6 +139,10 @@ export default function CardDetail() {
               ) : (
                 <span className="muted">Applications are closed.</span>
               )}
+            </div>
+            <div className="card-notify">
+              <div className="label">Get notified about future games</div>
+              <NotifySignup source={`card:${cardSlug}`} />
             </div>
           </>
         )}

@@ -176,6 +176,47 @@ main {
   color: #fff;
 }
 
+/* ── Mailing list signup ─────────────────────────────────────── */
+.notify-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 26rem;
+}
+.notify-form input[type="email"] {
+  flex: 1 1 12rem;
+  width: auto;
+}
+.notify-form .btn {
+  flex: 0 0 auto;
+  justify-content: center;
+}
+@media (max-width: 700px) {
+  .notify-form .btn {
+    flex-basis: 100%;
+  }
+}
+.notify-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.notify-done {
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+.notify-error {
+  flex-basis: 100%;
+  color: var(--red);
+  font-size: 0.75rem;
+  margin: 0;
+}
+
 /* ── Forms ───────────────────────────────────────────────────── */
 label.field {
   display: block;
@@ -194,6 +235,7 @@ label.field > span {
   margin-left: 0.2em;
 }
 input[type="text"],
+input[type="email"],
 input[type="url"],
 input[type="tel"],
 input[type="number"],
