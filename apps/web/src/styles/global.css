@@ -155,6 +155,14 @@ main {
   opacity: 0.4;
   pointer-events: none;
 }
+/* Filled gray: present but not clickable yet (e.g. Apply before a link exists). */
+.btn.btn-unavailable {
+  background: #6e6e6e;
+  border-color: #6e6e6e;
+  color: #1c1c1c;
+  opacity: 1;
+  cursor: not-allowed;
+}
 .btn-solid {
   background: var(--gold);
   color: #000;

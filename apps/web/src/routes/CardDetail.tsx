@@ -140,7 +140,7 @@ export default function CardDetail() {
                 </a>
               ) : game.status === "published" ? (
                 // Grayed out until the card has its application link.
-                <button className="btn btn-ghost" type="button" disabled>
+                <button className="btn btn-unavailable" type="button" disabled>
                   Apply
                 </button>
               ) : (
