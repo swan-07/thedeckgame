@@ -23,7 +23,7 @@ export const GAMES: GamePublic[] = [
     id: "s-4",
     suit: "S",
     rank: 4,
-    title: "TBA",
+    title: "Shadow of the Future",
     description: "",
     status: "published",
     opens_at: null,
