@@ -30,6 +30,7 @@ export const GAMES: GamePublic[] = [
     closes_at: null,
     game_date: "2026-11-06",
     location: "Berkeley // UC Berkeley",
+    apply_url: "https://partiful.com/e/xqQHuSGrxzQqFqx0zXru",
     sponsors: ["Swan Fellows", "MATS", "BlueDot"],
     winner: null,
   },
