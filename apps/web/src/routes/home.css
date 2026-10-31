@@ -226,8 +226,8 @@
   cursor: pointer;
 }
 .panel-back:hover {
-  border-color: var(--gold);
-  color: var(--gold);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .panel-title {
   font-family: var(--serif);
@@ -255,15 +255,15 @@
   cursor: pointer;
 }
 .suit-key:hover .suit-key-trigger {
-  border-color: var(--gold);
-  color: var(--gold);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .suit-key-menu {
   position: absolute;
   z-index: 30;
   min-width: 18rem;
   background: #242424;
-  border: 1px solid var(--gold);
+  border: 1px solid var(--accent);
   border-radius: 8px;
   padding: 1.1rem 1.3rem;
   display: flex;
