@@ -165,7 +165,7 @@ export const PLAYED_GAMES: PlayedGame[] = [
         event: "4 of Spades",
         card: "spades/4",
         date: "2026-11-06",
-        result: "Arjun defected and the other finalist cooperated, so Arjun won.",
+        result: "The other finalist cooperated almost instantly; Arjun waited until about the last minute to defect, and won.",
         detail: [
           {
             title: "FINALE: Modified Prisoner’s Dilemma",
