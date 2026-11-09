@@ -24,6 +24,8 @@ export interface GamePublic {
   winner_url?: string | null;
   /** Optional photo album link for a completed event. */
   photos_url?: string | null;
+  /** Posts people wrote about a completed event (e.g. LinkedIn), linked by the poster's name. */
+  posts?: { by: string; url: string; site?: string }[];
 }
 
 export const SUITS: { code: Suit; glyph: string; name: string; desc: string; red: boolean }[] = [

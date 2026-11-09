@@ -128,6 +128,22 @@ export default function CardDetail() {
                 </div>
               </div>
             )}
+            {game.posts?.length ? (
+              <div className="row">
+                <div className="label">Posts</div>
+                <div>
+                  {game.posts.map((p, i) => (
+                    <span key={p.url}>
+                      {i > 0 ? " · " : ""}
+                      <a href={p.url} target="_blank" rel="noopener noreferrer">
+                        {p.by}
+                      </a>
+                      {p.site ? <span className="muted"> on {p.site}</span> : null}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             <div style={{ marginTop: "2rem" }}>
               {game.status === "published" && game.apply_url ? (
                 <a

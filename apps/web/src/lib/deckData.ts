@@ -25,7 +25,7 @@ export const GAMES: GamePublic[] = [
     rank: 4,
     title: "Shadow of the Future",
     description: "",
-    status: "published",
+    status: "closed",
     opens_at: null,
     closes_at: null,
     game_date: "2026-11-06",
@@ -50,5 +50,12 @@ export const GAMES: GamePublic[] = [
     winner: "Habib Rahman",
     winner_url: "https://www.linkedin.com/in/habib-swe",
     photos_url: "https://photos.app.goo.gl/F8ivnuT8ofbjR2sh7",
+    posts: [
+      {
+        by: "Alex Wang",
+        url: "https://www.linkedin.com/feed/update/urn:li:activity:7513463043339603969/",
+        site: "LinkedIn",
+      },
+    ],
   },
 ];
