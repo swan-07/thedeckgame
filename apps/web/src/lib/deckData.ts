@@ -32,7 +32,8 @@ export const GAMES: GamePublic[] = [
     location: "Berkeley // UC Berkeley",
     apply_url: "https://partiful.com/e/xqQHuSGrxzQqFqx0zXru",
     sponsors: ["Swan Fellows", "MATS", "BlueDot"],
-    winner: null,
+    winner: "Arjun Desikan",
+    winner_url: "https://www.linkedin.com/in/arjun-builds/",
     photos_url: "https://photos.app.goo.gl/ZA3cS744jrGbBCsy6",
   },
   {
