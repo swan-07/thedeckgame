@@ -143,7 +143,14 @@ export const PLAYED_GAMES: PlayedGame[] = [
       "The last 2 play the finale. The person removed last is the third person.",
     ],
     images: [],
-    instances: [{ event: "4 of Spades", card: "spades/4", date: "2026-11-06", result: null }],
+    instances: [
+      {
+        event: "4 of Spades",
+        card: "spades/4",
+        date: "2026-11-06",
+        result: "Since all four teams tied, everyone played in one big circle. The final three were Arjun and two others.",
+      },
+    ],
   },
   {
     slug: "modified-prisoners-dilemma",
