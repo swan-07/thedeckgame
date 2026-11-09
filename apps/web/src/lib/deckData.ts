@@ -33,6 +33,7 @@ export const GAMES: GamePublic[] = [
     apply_url: "https://partiful.com/e/xqQHuSGrxzQqFqx0zXru",
     sponsors: ["Swan Fellows", "MATS", "BlueDot"],
     winner: null,
+    photos_url: "https://photos.app.goo.gl/ZA3cS744jrGbBCsy6",
   },
   {
     id: "s-5",
