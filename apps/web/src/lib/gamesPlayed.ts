@@ -123,7 +123,14 @@ export const PLAYED_GAMES: PlayedGame[] = [
       "Hosts (1 per team) will keep track of their actions/hp through the whiteboard",
     ],
     images: [],
-    instances: [{ event: "4 of Spades", card: "spades/4", date: "2026-11-06", result: null }],
+    instances: [
+      {
+        event: "4 of Spades",
+        card: "spades/4",
+        date: "2026-11-06",
+        result: "A tie between all four teams: all four were eliminated in the same round.",
+      },
+    ],
   },
   {
     slug: "the-circle",
@@ -158,7 +165,7 @@ export const PLAYED_GAMES: PlayedGame[] = [
         event: "4 of Spades",
         card: "spades/4",
         date: "2026-11-06",
-        result: null,
+        result: "Arjun defected and the other finalist cooperated, so Arjun won.",
         detail: [
           {
             title: "FINALE: Modified Prisoner’s Dilemma",
